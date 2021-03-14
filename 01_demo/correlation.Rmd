@@ -1,0 +1,32 @@
+# correlation
+?cor()
+#r < .3 = none or v weak, .3<r<.5 weak, .5 < r<.7 moderate, r >.7 strong
+
+head(mtcars)
+
+#import data set into ggplot 
+plt <- ggplot(mtcars,aes(x=hp,y=qsec))
+#create scatter plot
+plt + geom_point() 
+
+#use the cor() function to quantify the strngth of the correlation
+# btwn two variables 
+#calculate the correlation coefficient 
+cor(mtcars$hp,mtcars$qsec)
+
+#use the used cars dataset for another example
+#read in dataset 
+used_cars <- read.csv('used_car_data.csv',stringsAsFactors = F)
+# testing whether or not vehicle miles driven and selling price are correlated 
+#import data into ggplot
+plt <- ggplot(used_cars,aes(x=Miles_Driven,y=Selling_Price)) 
+#create a scatter plot 
+plt + geom_point() 
+#calculate the pearson correlation coeficient 
+cor(used_cars$Miles_Driven,used_cars$Selling_Price) 
+
+
+
+#convert data frame into numeric matrix
+used_matrix <- as.matrix(used_cars[,c("Selling_Price","Present_Price","Miles_Driven")])
+cor(used_matrix)

@@ -1,0 +1,8 @@
+#multiple linear regression
+
+
+## generate multiple liner regression model
+lm(qsec ~ mpg + disp + drat + wt + hp,data=mtcars)
+
+#generate summary statistics
+summary(lm(qsec ~ mpg + disp + drat + wt + hp,data=mtcars)) 

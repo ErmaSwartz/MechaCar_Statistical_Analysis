@@ -1,0 +1,13 @@
+# anova test 
+
+?aov()
+
+#filter columns from mtcars dataset
+mtcars_filt <- mtcars[,c("hp","cyl")] 
+#convert numeric column to factor
+mtcars_filt$cyl <- factor(mtcars_filt$cyl) 
+#compare means across multiple levels
+aov(hp ~ cyl,data=mtcars_filt) 
+#use summary to get p-values
+summary(aov(hp ~ cyl,data=mtcars_filt))
+

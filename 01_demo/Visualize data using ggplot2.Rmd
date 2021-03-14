@@ -1,0 +1,115 @@
+library(tidyverse)
+plt <- ggplot(mpg,aes(x=class)) #import dataset into ggplot2
+
+# build function with the mpg dataset
+head(mpg)
+
+# create a bar plot that represents the distribution of vehicle classes 
+plt <- ggplot(mpg,aes(x=class)) 
+#import dataset into ggplot2
+plt + geom_bar() 
+#plot a bar plot
+
+# use the summarize function to summarize the data and the geom_col to visualize
+# results 
+#create summary table
+mpg_summary <- mpg %>% group_by(manufacturer) %>% summarize(Vehicle_Count=n(), .groups = 'keep') 
+plt <- ggplot(mpg_summary,aes(x=manufacturer,y=Vehicle_Count)) #import dataset into ggplot2
+#plot a bar plot
+plt + geom_col() 
+
+# change the titels of axes
+#plot bar plot with labels
+plt + geom_col() + xlab("Manufacturing Company") + ylab("Number of Vehicles in Dataset")
+
+#plot a boxplot with labels
+plt + geom_col() + xlab("Manufacturing Company") + ylab("Number of Vehicles in Dataset") + 
+#rotate the x-axis label 45 degrees
+theme(axis.text.x=element_text(angle=45,hjust=1)) 
+
+#line plots 
+plt + geom_line() + scale_x_discrete(limits=c(4,6,8)) + scale_y_continuous(breaks = c(15:30)) #add line plot with labels
+
+#import dataset into ggplot2
+plt <- ggplot(mpg,aes(x=displ,y=cty)) 
+# add scatter plot with labels 
+plt + geom_point() + xlab("Engine Size (L)") + ylab("City Fuel-Efficiency (MPG)") 
+
+#import dataset into ggplot2
+plt <- ggplot(mpg,aes(x=displ,y=cty,color=class)) 
+#add scatter plot with labels
+#customize 
+plt + geom_point() + labs(x="Engine Size (L)", y="City Fuel-Efficiency (MPG)", color="Vehicle Class") 
+
+
+#import dataset into ggplot2
+plt <- ggplot(mpg,aes(x=displ,y=cty,color=class,shape=drv)) 
+#add scatter plot with multiple aesthetics
+plt + geom_point() + labs(x="Engine Size (L)", y="City Fuel-Efficiency (MPG)", color="Vehicle Class",shape="Type of Drive") 
+
+#import dataset into ggplot2
+plt <- ggplot(mpg,aes(y=hwy))
+#add boxplot
+plt + geom_boxplot() 
+
+#import dataset into ggplot2
+plt <- ggplot(mpg,aes(x=manufacturer,y=hwy)) 
+#add boxplot and rotate x-axis labels 45 degrees
+plt + geom_boxplot() + theme(axis.text.x=element_text(angle=45,hjust=1)) 
+
+
+#create summary table
+mpg_summary <- mpg %>% group_by(class,year) %>% summarize(Mean_Hwy=mean(hwy), .groups = 'keep') 
+#create heatmap with labels
+plt <- ggplot(mpg_summary, aes(x=class,y=factor(year),fill=Mean_Hwy))
+plt + geom_tile() + labs(x="Vehicle Class",y="Vehicle Year",fill="Mean Highway (MPG)")
+
+
+#create summary table
+mpg_summary <- mpg %>% group_by(model,year) %>% summarize(Mean_Hwy=mean(hwy), .groups = 'keep') 
+plt <- ggplot(mpg_summary, aes(x=model,y=factor(year),fill=Mean_Hwy)) #import dataset into ggplot2
+#add heatmap with labels 
+plt + geom_tile() + labs(x="Model",y="Vehicle Year",fill="Mean Highway (MPG)") + theme(axis.text.x = element_text(angle=90,hjust=1,vjust=.5)) #rotate x-axis labels 90 degrees
+
+
+#import dataset into ggplot2
+plt <- ggplot(mpg,aes(x=manufacturer,y=hwy)) 
+#add boxplot
+plt + geom_boxplot() +
+#rotate x-axis labels 45 degrees
+theme(axis.text.x=element_text(angle=45,hjust=1)) + 
+#overlay scatter plot on top
+geom_point() 
+
+#create summary table
+mpg_summary <- mpg %>% group_by(class) %>% summarize(Mean_Engine=mean(displ), .groups = 'keep') 
+#import dataset into ggplot2
+plt <- ggplot(mpg_summary,aes(x=class,y=Mean_Engine))
+#add scatter plot
+plt + geom_point(size=4) + labs(x="Vehicle Class",y="Mean Engine Size") 
+
+#import dataset into ggplot2
+mpg_summary <- mpg %>% group_by(class) %>% summarize(Mean_Engine=mean(displ),SD_Engine=sd(displ), .groups = 'keep')
+plt <- ggplot(mpg_summary,aes(x=class,y=Mean_Engine)) 
+#add scatter plot with labels
+plt + geom_point(size=4) + labs(x="Vehicle Class",y="Mean Engine Size") + 
+#overlay with error bars
+geom_errorbar(aes(ymin=Mean_Engine-SD_Engine,ymax=Mean_Engine+SD_Engine))
+
+
+#convert to long format
+mpg_long <- mpg %>% gather(key="MPG_Type",value="Rating",c(cty,hwy)) 
+head(mpg_long)
+
+#import dataset into ggplot2
+plt <- ggplot(mpg_long,aes(x=manufacturer,y=Rating,color=MPG_Type)) 
+#add boxplot with labels rotated 45 degrees
+plt + geom_boxplot() + theme(axis.text.x=element_text(angle=45,hjust=1)) 
+
+
+#import dataset into ggplot2
+plt <- ggplot(mpg_long,aes(x=manufacturer,y=Rating,color=MPG_Type)) 
+#create multiple boxplots, one for each MPG type
+plt + geom_boxplot() + facet_wrap(vars(MPG_Type)) + 
+#rotate x-axis labels
+theme(axis.text.x=element_text(angle=45,hjust=1),legend.position = "none") + xlab("Manufacturer") 

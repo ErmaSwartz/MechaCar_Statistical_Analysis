@@ -1,0 +1,16 @@
+# identifying stats test typers 
+# qualitative test for normality 
+# checking for the bellcurve shape
+
+#visualize distribution using density plot
+ggplot(mtcars,aes(x=wt)) + geom_density() 
+
+
+# the quantitative test for normality 
+# uses a stats test to quantify the probability of whether or not the test data 
+# came from a normally distributed data set
+?shapiro.test()
+
+#only requires numeric vector of values 
+shapiro.test(mtcars$wt)
+# if the data is greater than .05, then the data is considered normally distributed 

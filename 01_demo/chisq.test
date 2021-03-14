@@ -1,0 +1,11 @@
+# chisq.test
+
+?chisq.test()
+# generate contingency table 
+table(mpg$class,mpg$year)
+
+#pass the contingency table to the chisq.test function
+#generate contingency table 
+tbl <- table(mpg$class,mpg$year)
+#compare categorical distributions 
+chisq.test(tbl)
