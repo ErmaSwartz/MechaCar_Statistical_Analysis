@@ -11,3 +11,8 @@
 ##### The current manufacturing data indicates that lot one and lot two do not exceed 100 pounds and therefore meet this design specification. Lot 3's variance is above 100 and therefore does not live up to the specification. 
 #### See below 
 ![image](https://github.com/ErmaSwartz/MechaCar_Statistical_Analysis/blob/main/challenge/lot%20summary%20.png)
+## Section Three 
+### T-Tests on suspension coils 
+##### The t-test demonstarted that the groups are exactly the same. The p-value in the first two lots is not enough to be statistically significant. Lot 3 does however have a p-value that indicates significance. See below:
+![image](https://github.com/ErmaSwartz/MechaCar_Statistical_Analysis/blob/main/challenge/ttest%201%20.png)
+![image](https://github.com/ErmaSwartz/MechaCar_Statistical_Analysis/blob/main/challenge/t.test%201%20and%202%20.png)
