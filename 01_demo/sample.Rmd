@@ -30,6 +30,7 @@ plt + geom_density()
 # #compare sample versus population means
 t.test(log10(sample_table$Miles_Driven),mu=mean(log10(population_table$Miles_Driven)))
 
+
 #generate 50 randomly sampled data points
 sample_table <- population_table %>% sample_n(50)
 #generate another 50 randomly sampled data points
